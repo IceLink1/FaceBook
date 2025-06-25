@@ -25,7 +25,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Facebook Clone API')
     .setDescription('A comprehensive social media API similar to Facebook')
-    .setVersion('1.0')
+    .setVersion('1.53.0')
     .addBearerAuth(
       {
         type: 'http',
