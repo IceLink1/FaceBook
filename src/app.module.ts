@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
 import { FriendsModule } from './friends/friends.module';
+import { FilesModule } from './uploads/files.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -13,13 +15,15 @@ import { FriendsModule } from './friends/friends.module';
       isGlobal: true,
     }),
     MongooseModule.forRoot(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/facebook-clone',
+      process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/facebook',
     ),
     AuthModule,
     UsersModule,
+    FilesModule,
+    PaymentModule,
     PostsModule,
     CommentsModule,
     FriendsModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
