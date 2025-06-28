@@ -1,0 +1,28 @@
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+COPY package*.json .
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine
+WORKDIR /app
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+
+RUN apk add --no-cache mongodb
+
+RUN mkdir -p /data/db
+
+ENV NODE_ENV=production \
+    MONGODB_URI=mongodb://localhost:27017/facebook \
+    PORT=8088 \
+    JWT_SECRET=your-secret-key-here
+
+EXPOSE 8088 27017
+
+CMD ["sh", "-c", "mongod --bind_ip_all --fork --logpath=/var/log/mongodb.log && node dist/main.js"]
