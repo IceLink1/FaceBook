@@ -14,15 +14,13 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
-RUN apk add --no-cache mongodb
-
-RUN mkdir -p /data/db
-
 ENV NODE_ENV=production \
-    MONGODB_URI=mongodb://localhost:27017/facebook \
+    MONGODB_URI=mongodb+srv://icelink39:1234@cluster.21g6q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster \
     PORT=8088 \
-    JWT_SECRET=your-secret-key-here
+    JWT_SECRET=fkwru38ohdfw8r3o18hr2n23on3xr8d7x2di2q37e2djb1200ws \
+    STRIPE_SECRET_KEY=sk_test_51RenlXPGV9ff9hRnQbBVhKpmIy79iMS0yMARV4zplcqSxJ5Nw9y5mWeZXPhEH2u5VEZzdBIwRLNNrmUY8NgnRE8Q00OJOt4bqN
 
-EXPOSE 8088 27017
 
-CMD ["sh", "-c", "mongod --bind_ip_all --fork --logpath=/var/log/mongodb.log && node dist/main.js"]
+EXPOSE 8088
+
+CMD ["node", "dist/main.js"]
