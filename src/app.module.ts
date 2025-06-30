@@ -7,7 +7,6 @@ import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
 import { FriendsModule } from './friends/friends.module';
 import { FilesModule } from './uploads/files.module';
-import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -20,7 +19,6 @@ import { PaymentModule } from './payment/payment.module';
     AuthModule,
     UsersModule,
     FilesModule,
-    PaymentModule,
     PostsModule,
     CommentsModule,
     FriendsModule,
